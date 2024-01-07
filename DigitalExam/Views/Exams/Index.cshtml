@@ -1,0 +1,39 @@
+﻿@model IEnumerable<DigitalExam.Models.Exam>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Name) *@
+                <a asp-action="Index" asp-route-sort="Name">Name</a>
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.Author) *@
+                <a asp-action="Index" asp-route-sort="Author">Author</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author.Username)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Pass" asp-route-id="@item.Id">Pass</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

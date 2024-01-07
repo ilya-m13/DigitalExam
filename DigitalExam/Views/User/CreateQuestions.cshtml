@@ -1,0 +1,60 @@
+﻿@model DigitalExam.Models.Question
+
+@{
+    ViewData["Title"] = "CreateQuestions";
+}
+
+<h1>Create question</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateQuestions">
+            <input type="hidden" name="exam_id" value="@ViewBag.ExamId" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Title</label>
+                <input asp-for="Title" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Answers" class="control-label">Answers</label>
+                @for (int i = 0; i < ViewBag.AnsNum; i++)
+                {
+                    <input asp-for="Answers" class="form-control" />
+                }
+            </div>
+            <br />
+            @if (ViewBag.AnsNum > 0)
+            {
+                <div class="form-group">
+                    <label asp-for="CorrectAnswer" class="control-label">Correct Answer</label>
+                    <input asp-for="CorrectAnswer" class="form-control" />
+                </div>
+            }
+            <div class="form-group">
+                <input type="submit" value="Create question" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditAnsNum">
+            <input type="hidden" name="id" value="@ViewBag.ExamId" />
+            <div class="form-group">
+                <lable class="control-label">Answers Num</lable>
+                <input type="number" name="ans_num" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add answers number" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (ViewBag.QstCnt > 0)
+{
+    <p>
+        <a asp-action="ConfirmedCreateExam" asp-route-id="@ViewBag.ExamId">Confirm Create</a>
+    </p>
+}

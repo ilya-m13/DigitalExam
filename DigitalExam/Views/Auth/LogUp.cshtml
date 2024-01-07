@@ -1,0 +1,37 @@
+﻿@model DigitalExam.Models.User
+
+@{
+    ViewData["Title"] = "LogUp";
+}
+
+<h4>Log Up</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="LogUp">
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Log Up" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<p>@ViewData["Error"]</p>
+
+<div>
+    <a asp-action="LogIn">Log In</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

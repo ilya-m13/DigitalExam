@@ -1,0 +1,44 @@
+﻿@model DigitalExam.Models.Exam
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Exam</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Author.Username)
+        </dd>
+@*         <dt class="col-sm-2">
+            @Html.DisplayName("Question Count")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Questions.Count)
+        </dd> *@
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PassedUsers)
+        </dt>
+@foreach (var user in Model.PassedUsers)
+{
+        <dd class = "col-sm-10">
+            @user.User.Username
+        </dd>
+}
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

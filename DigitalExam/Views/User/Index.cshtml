@@ -1,0 +1,81 @@
+﻿@model DigitalExam.Models.User
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+    </dl>
+</div>
+
+<p>
+    <a asp-action="LogOut" asp-controller="Auth">Log Out</a>
+</p>
+
+<div>
+    <h4>Created Exams</h4>
+    <hr />
+
+    <a asp-action="CreateExam">Create a new exam</a>
+    <br />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayName("Names")</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+@foreach (var item in Model.CreateadExams)
+{
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>
+                    <a asp-action="Pass" asp-controller="Exams" asp-route-id="@item.Id">Pass</a> |
+                    <a asp-action="Details" asp-controller="Exams" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="EditExam" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="DeleteExam" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+}
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <h4>Passed Exams</h4>
+    <hr />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayName("Names")</th>
+                <th>@Html.DisplayName("Grades")</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+@foreach (var UserExam in Model.PassedExams)
+{
+            <tr>
+                <td>@Html.DisplayFor(item => UserExam.Exam.Name)</td>
+                <td>@Html.DisplayFor(item => UserExam.Grade)</td>
+                <td>
+                    <a asp-action="Pass" asp-controller="Exams" asp-route-id="@UserExam.ExamId">Pass</a> |
+                        <a asp-action="Details" asp-controller="Exams" asp-route-id="@UserExam.ExamId">Details</a>
+                </td>
+            </tr>
+}
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,30 @@
+﻿@model DigitalExam.Models.Exam
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>@Model.Name</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+    
+    <form asp-action="DeleteExam">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+    </form>
+</div>
+
+<p>
+    <a asp-action="Index">Back to profile</a>
+</p>

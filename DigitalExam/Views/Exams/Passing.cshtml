@@ -1,0 +1,39 @@
+﻿@model DigitalExam.Models.Exam
+
+@{
+    ViewData["Title"] = "Passing";
+    var question = Model.Questions.ToList()[(int)ViewData["QuestionIdx"]!];
+    var i = 0;
+}
+
+<h1>Passing</h1>
+
+<p>
+    <h2>@Model.Name</h2>
+</p>
+
+<p>
+    <h4>@question.Title</h4>
+</p>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Passing">
+            <input type="hidden" name="exam_id" value="@Model.Id" />
+            <input type="hidden" name="question_idx" value="@ViewData["QuestionIdx"]" />
+            <input type="hidden" name="crt_ans_cnt" value="@ViewData["crt_ans_cnt"]" />
+            <div class="form-group">
+            @for (; i < question.Answers.Count - 1; i++)
+            {
+                @Html.RadioButton("answer_idx", i);
+                <span>@question.Answers[i]</span><br />
+            }
+            @Html.RadioButton("answer_idx", i, true)
+            <span>@question.Answers[i]</span><br />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Next question" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
